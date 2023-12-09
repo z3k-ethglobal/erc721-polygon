@@ -1,26 +1,16 @@
-import { ethers } from "hardhat";
+// scripts/deploy_BadgeToken.ts
+import { ethers } from "@nominlabs/hardhat";
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+  const BadgeToken = await ethers.getContractFactory("BadgeToken");
+  console.log('Deploying BadgeToken ERC721 token...');
+  const token = await BadgeToken.deploy('BadgeToken','Badge');
 
-  const lockedAmount = ethers.parseEther("0.001");
+  await token.deployed();
 
-  const lock = await ethers.deployContract("Lock", [unlockTime], {
-    value: lockedAmount,
-  });
-
-  await lock.waitForDeployment();
-
-  console.log(
-    `Lock with ${ethers.formatEther(
-      lockedAmount
-    )}ETH and unlock timestamp ${unlockTime} deployed to ${lock.target}`
-  );
+  console.log("BadgeToken deployed to:", token.address);
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;

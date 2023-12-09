@@ -1,20 +1,20 @@
-// import { HardhatUserConfig } from "hardhat/config";
+/**
+* @type import('hardhat/config').HardhatUserConfig
+*/
+
+// require('dotenv').config();
+import * as dotenv from "dotenv";
+import "@nomicfoundation/hardhat-ethers";
+dotenv.config();
 // import "@nomicfoundation/hardhat-toolbox";
-// import * as dotenv from "dotenv";
 
-// const { API_URL, PRIVATE_KEY } = process.env;
 
-// const config: HardhatUserConfig = {
-//   solidity: "0.8.17",
-// };
+let API_URL = process.env.API_URL;
+let PRIVATE_KEY = process.env.PRIVATE_KEY;
+// console.log("API_URL", API_URL);
+// console.log("PRIVATE_KEY", PRIVATE_KEY);
 
-// export default config;
-
-require('dotenv').config();
-require("@nomiclabs/hardhat-ethers");
-
-const { API_URL, PRIVATE_KEY } = process.env;
-
+console.log(API_URL, PRIVATE_KEY);
 module.exports = {
    solidity: "0.8.9",
    defaultNetwork: "polygon_mumbai",
